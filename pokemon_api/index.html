@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemon Api</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div>
+        <button type="submit" id="button">Fetch Pokemon</button>
+        <div id="output"></div>
+        <script>
+            const button = document.getElementById("button");
+            const output = document.getElementById("output");
+            button.addEventListener("click", () => {
+                fetch("https://pokeapi.co/api/v2/pokemon?limit=1000")
+                    .then(response => response.json())
+                    .then(data => {
+                        const pokemonList = data.results;
+                        const pokemonNames = pokemonList.map(pokemon => pokemon.name);
+                        const pokemonNamesString = pokemonNames.join(", ");
+                        output.innerText = pokemonNamesString;
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            });
+        </script>
+    </div>
+</body>
+
+</html>
